@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import PhotoItem from "./PhotoItem";
+import { PaginationBar, PaginationLink } from "./Pagination";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -28,7 +29,41 @@ const PhotoList = () => {
     <PhotoItem id={photo.id} image={photo.img_src} key={photo.id} />
   ));
 
-  return <Container>{photoItems}</Container>;
+  const loadPrevious = (e) => {
+    e.preventDefault();
+    let pageNumber = page - 1;
+    // TODO: condition
+    setPage(pageNumber);
+    setUrl(
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${pageNumber}&api_key=${API_KEY}`
+    );
+  };
+
+  const loadNext = (e) => {
+    e.preventDefault();
+    let pageNumber = page + 1;
+    // TODO: condition
+    setPage(page + 1);
+    setUrl(
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${pageNumber}&api_key=${API_KEY}`
+    );
+  };
+
+  return (
+    <div>
+      <Container>
+        {photoItems}
+        <PaginationBar>
+          <PaginationLink href="/" onClick={loadPrevious}>
+            &lt;
+          </PaginationLink>
+          <PaginationLink href="/" onClick={loadNext}>
+            &gt;
+          </PaginationLink>
+        </PaginationBar>
+      </Container>
+    </div>
+  );
 };
 
 export default PhotoList;
