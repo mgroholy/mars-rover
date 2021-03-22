@@ -12,20 +12,19 @@ const Container = styled.div`
 `;
 
 const PhotoList = () => {
-  const [state, setState] = useState({
-    url: `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=0&page=1&api_key=${API_KEY}`,
-    photos: [],
-  });
+  const [photos, setPhotos] = useState([]);
+  const [rover, setRover] = useState("curiosity");
+  const [date, setDate] = useState("2012-08-06");
+  const [page, setPage] = useState(1);
+  const [url, setUrl] = useState(
+    `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
+  );
 
   useEffect(() => {
-    axios.get(state.url).then((response) =>
-      setState({
-        photos: response.data.photos,
-      })
-    );
-  }, [state.url]);
+    axios.get(url).then((response) => setPhotos(response.data.photos));
+  }, [url]);
 
-  const photoItems = state.photos.map((photo) => (
+  const photoItems = photos.map((photo) => (
     <PhotoItem id={photo.id} image={photo.img_src} key={photo.id} />
   ));
 
