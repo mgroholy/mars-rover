@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styled from "styled-components";
 import PhotoItem from "./PhotoItem";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+
+const Container = styled.div`
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 1200px;
+`;
 
 const PhotoList = () => {
   const [state, setState] = useState({
@@ -22,7 +29,7 @@ const PhotoList = () => {
     <PhotoItem id={photo.id} image={photo.img_src} key={photo.id} />
   ));
 
-  return <div>{photoItems}</div>;
+  return <Container>{photoItems}</Container>;
 };
 
 export default PhotoList;
