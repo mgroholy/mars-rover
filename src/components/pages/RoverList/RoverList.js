@@ -26,7 +26,7 @@ const RoverList = () => {
   return (
     <RoverContainer>
       {rovers.map((rover) => (
-        <RoverCard>
+        <RoverCard to={`/rovers/${rover.id}`} key={rover.id}>
           <RoverImg src={RoverCardImages[rover.name]} />
           <RoverName>{rover.name}</RoverName>
         </RoverCard>
