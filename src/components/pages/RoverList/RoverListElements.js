@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const RoverContainer = styled.div`
@@ -11,13 +12,14 @@ export const RoverContainer = styled.div`
   padding-right: 50px;
 `;
 
-export const RoverCard = styled.div`
+export const RoverCard = styled(Link)`
   position: relative;
   width: 22%;
   height: 70%;
   overflow: hidden;
   border-radius: 5px;
   background: black;
+  text-decoration: none;
   &:hover {
     transform: scale(1.03);
     transition: 0.3s ease-in-out;
@@ -42,4 +44,9 @@ export const RoverName = styled.h1`
   margin-bottom: 10px;
   background: transparent;
   color: #fff;
+  font-size: 30px;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 24px;
+  }
 `;
