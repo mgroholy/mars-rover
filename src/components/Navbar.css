@@ -1,0 +1,19 @@
+.nav-bar a {
+  float: right;
+  display: block;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav-bar a:hover {
+  color: #ad6242;
+}
+
+.nav-bar .active {
+  color: #ad6242;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+}
