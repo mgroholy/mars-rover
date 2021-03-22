@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../images/nasa.png";
+import "./Navbar.css";
 
 const NavBar = styled.div`
   overflow: hidden;
@@ -9,20 +10,6 @@ const NavBar = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-`;
-
-const NavLink = styled(Link)`
-  float: right;
-  display: block;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-
-  :hover {
-    color: #ad6242;
-  }
 `;
 
 const Image = styled.img`
@@ -33,12 +20,20 @@ const Image = styled.img`
 
 const Navbar = () => {
   return (
-    <NavBar>
+    <NavBar className="nav-bar">
       <Image alt="red nasa" src={logo} />
-      <NavLink to="/favorites">Favorites</NavLink>
-      <NavLink to="/photos">Photos</NavLink>
-      <NavLink to="/rovers">Rovers</NavLink>
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/favorites" activeClassName="active">
+        Favorites
+      </NavLink>
+      <NavLink to="/photos" activeClassName="active">
+        Photos
+      </NavLink>
+      <NavLink to="/rovers" activeClassName="active">
+        Rovers
+      </NavLink>
+      <NavLink exact to="/" activeClassName="active">
+        Home
+      </NavLink>
     </NavBar>
   );
 };
