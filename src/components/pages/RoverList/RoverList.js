@@ -1,35 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   RoverContainer,
   RoverCard,
   RoverImg,
   RoverName,
 } from "./RoverListElements";
-
-import CuriosityImg from "../../../images/curiosity-portrait.jpg";
-import PerseveranceImg from "../../../images/Perseverance_Landing_Skycrane_portrait.jpg";
-import SpiritImg from "../../../images/1280px-NASA_Mars_Rover_portrait.jpg";
-import OpportunityImg from "../../../images/opportunity-portrait.jpg";
+import axios from "axios";
+import RoverCardImages from "./RoverCardImages";
 
 const RoverList = () => {
+  const url = "https://api.nasa.gov/mars-photos/api/v1/rovers";
+
+  const [rovers, setRovers] = useState([]);
+
+  const fetchData = async (url) => {
+    const response = await axios.get(
+      `${url}?api_key=${process.env.REACT_APP_MARS_ROVER_API_KEY}`
+    );
+    setRovers(response.data.rovers);
+    console.log(response);
+  };
+
+  useEffect(() => fetchData(url), [url]);
+
   return (
     <RoverContainer>
-      <RoverCard>
-        <RoverImg src={CuriosityImg} />
-        <RoverName>Rover</RoverName>
-      </RoverCard>
-      <RoverCard>
-        <RoverImg src={SpiritImg} />
-        <RoverName>Rover</RoverName>
-      </RoverCard>
-      <RoverCard>
-        <RoverImg src={PerseveranceImg} />
-        <RoverName>Rover</RoverName>
-      </RoverCard>
-      <RoverCard>
-        <RoverImg src={OpportunityImg} />
-        <RoverName>Rover</RoverName>
-      </RoverCard>
+      {rovers.map((rover) => (
+        <RoverCard>
+          <RoverImg src={RoverCardImages[rover.name]} />
+          <RoverName>{rover.name}</RoverName>
+        </RoverCard>
+      ))}
     </RoverContainer>
   );
 };
