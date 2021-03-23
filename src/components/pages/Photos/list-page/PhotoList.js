@@ -57,7 +57,13 @@ const PhotoList = () => {
     );
   };
 
-  const filterByRover = (e) => {};
+  const filterByRover = (e) => {
+    let roverName = e.target.textContent;
+    setRover(roverName);
+    setUrl(
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
+    );
+  };
 
   return (
     <div>
