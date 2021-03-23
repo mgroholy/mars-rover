@@ -8,6 +8,7 @@ import RoverList from "./components/pages/RoverList/RoverList";
 import RoverDetail from "./components/pages/RoverDetail/RoverDetail";
 import FavoriteContext from "./components/context/FavoriteContext";
 import { useState } from "react";
+import FavoritePhotoList from "./components/pages/FavoritePhotoList/FavoritePhotoList";
 
 function App() {
   const favoriteHook = useState([]);
@@ -23,6 +24,7 @@ function App() {
           <Route path="/photos" component={PhotoList} />
           <FavoriteContext.Provider value={favoriteHook}>
             <Route path="/photo/:id" component={PhotoDetail} />
+            <Route path="/favorites" component={FavoritePhotoList} />
           </FavoriteContext.Provider>
         </Switch>
       </div>
