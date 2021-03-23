@@ -17,11 +17,25 @@ const Container = styled.div`
 const PhotoList = () => {
   const [photos, setPhotos] = useState([]);
   const [rover, setRover] = useState("curiosity");
-  const [date, setDate] = useState("2012-08-06");
+  const [date, setDate] = useState("2021-03-22");
   const [page, setPage] = useState(1);
   const [url, setUrl] = useState(
     `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
   );
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}?api_key=${API_KEY}`
+      )
+      .then((response) => {
+        let lastDate = response.data.rover.max_date;
+        setDate(lastDate);
+        setUrl(
+          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
+        );
+      });
+  }, [rover]);
 
   useEffect(() => {
     axios.get(url).then((response) => setPhotos(response.data.photos));
@@ -60,9 +74,6 @@ const PhotoList = () => {
   const filterByRover = (e) => {
     let roverName = e.target.textContent;
     setRover(roverName);
-    setUrl(
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
-    );
   };
 
   return (
