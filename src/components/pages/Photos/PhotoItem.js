@@ -13,7 +13,7 @@ const PhotoItem = ({ id, image }) => {
       <img
         alt="mars"
         src={image}
-        width="200px"
+        width="120px"
         style={{ borderRadius: "10px" }}
       />
     </Card>

@@ -9,7 +9,8 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 const Container = styled.div`
   margin: 0 auto;
   margin-top: 100px;
-  width: 1200px;
+  margin-bottom: 30px;
+  width: 800px;
 `;
 
 const PhotoList = () => {
@@ -51,17 +52,15 @@ const PhotoList = () => {
 
   return (
     <div>
-      <Container>
-        {photoItems}
-        <PaginationBar>
-          <PaginationLink href="/" onClick={loadPrevious}>
-            &lt;
-          </PaginationLink>
-          <PaginationLink href="/" onClick={loadNext}>
-            &gt;
-          </PaginationLink>
-        </PaginationBar>
-      </Container>
+      <Container>{photoItems}</Container>
+      <PaginationBar>
+        <PaginationLink href="/" onClick={loadPrevious}>
+          &lt;
+        </PaginationLink>
+        <PaginationLink href="/" onClick={loadNext}>
+          &gt;
+        </PaginationLink>
+      </PaginationBar>
     </div>
   );
 };
