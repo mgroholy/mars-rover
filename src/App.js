@@ -6,6 +6,7 @@ import PhotoList from "./components/pages/Photos/list-page/PhotoList";
 import PhotoDetail from "./components/pages/Photos/detail-page/PhotoDetail";
 import RoverList from "./components/pages/RoverList/RoverList";
 import RoverDetail from "./components/pages/RoverDetail/RoverDetail";
+import { FavoriteProvider } from "./components/context/FavoriteContext";
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
           <Route path="/rovers" exact component={RoverList} />
           <Route path="/rovers/:name" exact component={RoverDetail} />
           <Route path="/photos" component={PhotoList} />
-          <Route path="/photo/:id" component={PhotoDetail} />
+          <FavoriteProvider>
+            <Route path="/photo/:id" component={PhotoDetail} />
+          </FavoriteProvider>
         </Switch>
       </div>
     </Router>
