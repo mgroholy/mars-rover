@@ -57,9 +57,11 @@ const PhotoList = () => {
     );
   };
 
+  const filterByRover = (e) => {};
+
   return (
     <div>
-      <Filterbar />
+      <Filterbar onFilterClick={filterByRover} />
       <Container>{photoItems}</Container>
       <PaginationBar>
         <PaginationLink href="/" onClick={loadPrevious}>
