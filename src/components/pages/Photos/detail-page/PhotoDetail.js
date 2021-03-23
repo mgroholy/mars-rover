@@ -56,7 +56,7 @@ const FavoriteIcon = styled.span`
 `;
 
 const PhotoDetail = (props) => {
-  const { image, rover, date } = props.location.state;
+  const { id, image, rover, date } = props.location.state;
 
   const [hover, setHover] = useState(false);
   const [favorited, setFavorited] = useState(false);
@@ -68,7 +68,7 @@ const PhotoDetail = (props) => {
   const onHover = () => setHover(!hover);
 
   const addToFavorites = () => {
-    const imageObj = { image, rover, date };
+    const imageObj = { id, image, rover, date };
     setFavorites([...favorites, imageObj]);
   };
   const removeFromFavorites = () => {
@@ -77,12 +77,12 @@ const PhotoDetail = (props) => {
   };
 
   useEffect(() => {
-    if (favorites.some((img) => img.image === image)) {
+    if (favorites.some((img) => img.id === id)) {
       setFavorited(true);
     } else {
       setFavorited(false);
     }
-  }, [favorited, image, favorites]);
+  }, [favorited, id, favorites]);
 
   return (
     <Container>
