@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/pages/Home/Home";
 import RoverList from "./components/pages/RoverList/RoverList";
 import PhotoList from "./components/pages/Photos/PhotoList";
+import RoverDetail from "./components/pages/RoverDetail/RoverDetail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/rovers" exact component={RoverList} />
           <Route path="/photos" component={PhotoList} />
+          <Route path="/rovers/:name" exact component={RoverDetail} />
         </Switch>
       </div>
     </Router>
