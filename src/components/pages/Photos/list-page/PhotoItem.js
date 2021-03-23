@@ -8,16 +8,16 @@ const Card = styled.div`
   display: inline-block;
 `;
 
+const Image = styled.img`
+  width: 120px;
+  border-radius: 10px;
+`;
+
 const PhotoItem = ({ id, image }) => {
   return (
     <Card>
       <Link to={`/photo/${id}`}>
-        <img
-          alt="mars"
-          src={image}
-          width="120px"
-          style={{ borderRadius: "10px" }}
-        />
+        <Image alt="mars" src={image} />
       </Link>
     </Card>
   );
