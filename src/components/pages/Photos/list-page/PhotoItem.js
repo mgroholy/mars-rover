@@ -11,6 +11,15 @@ const Card = styled.div`
 const Image = styled.img`
   width: 120px;
   border-radius: 10px;
+  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25),
+    -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+  transition: 0.4s;
+
+  :hover {
+    transform: scale(0.9, 0.9);
+    box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
+      -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+  }
 `;
 
 const PhotoItem = ({ id, image, rover, date }) => {
