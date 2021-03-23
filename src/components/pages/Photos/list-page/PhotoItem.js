@@ -13,10 +13,15 @@ const Image = styled.img`
   border-radius: 10px;
 `;
 
-const PhotoItem = ({ id, image }) => {
+const PhotoItem = ({ id, image, rover, date }) => {
   return (
     <Card>
-      <Link to={`/photo/${id}`}>
+      <Link
+        to={{
+          pathname: `/photo/${id}`,
+          state: { image, rover, date },
+        }}
+      >
         <Image alt="mars" src={image} />
       </Link>
     </Card>
