@@ -1,7 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { RoverDetailCard, RoverDetailContainer } from "./RoverDetailElements";
+import RoverCardImages from "../RoverList/RoverCardImages";
+import RoverDescription from "./RoverDescription";
+import {
+  RoverDetailCard,
+  RoverDetailContainer,
+  RoverDetailImg,
+  RoverDetailName,
+  RoverDetailDescription,
+  RoverDetailContent,
+} from "./RoverDetailElements";
 
 const RoverDetail = () => {
   const { pathname } = useLocation();
@@ -22,7 +31,36 @@ const RoverDetail = () => {
 
   return (
     <RoverDetailContainer>
-      <RoverDetailCard>Rover</RoverDetailCard>
+      {rover.name && (
+        <RoverDetailCard>
+          <RoverDetailContent>
+            <RoverDetailName>{rover.name}</RoverDetailName>
+            <RoverDetailDescription>
+              {RoverDescription[rover.name.toLowerCase()]}
+            </RoverDetailDescription>
+            <RoverDetailName></RoverDetailName>
+            <RoverDetailDescription>
+              Launch date: {rover.launch_date}
+            </RoverDetailDescription>
+            <RoverDetailDescription>
+              Landing date: {rover.landing_date}
+            </RoverDetailDescription>
+            <RoverDetailDescription>
+              Status: {rover.status}
+            </RoverDetailDescription>
+            <RoverDetailDescription>
+              Photos taken: {rover.total_photos}
+            </RoverDetailDescription>
+            <RoverDetailDescription>
+              Date of most recent phot: {rover.max_date}
+            </RoverDetailDescription>
+            <RoverDetailDescription>
+              Sols spent on Mars: {rover.max_sol}
+            </RoverDetailDescription>
+          </RoverDetailContent>
+          <RoverDetailImg src={RoverCardImages[rover.name].normal} />
+        </RoverDetailCard>
+      )}
     </RoverDetailContainer>
   );
 };
