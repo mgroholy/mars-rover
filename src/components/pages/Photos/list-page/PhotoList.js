@@ -28,7 +28,13 @@ const PhotoList = () => {
   }, [url]);
 
   const photoItems = photos.map((photo) => (
-    <PhotoItem id={photo.id} image={photo.img_src} key={photo.id} />
+    <PhotoItem
+      id={photo.id}
+      image={photo.img_src}
+      rover={photo.rover.name}
+      date={photo.earth_date}
+      key={photo.id}
+    />
   ));
 
   const loadPrevious = (e) => {
