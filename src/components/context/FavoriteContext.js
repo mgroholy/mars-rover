@@ -1,16 +1,7 @@
-import React, { createContext, useState } from "react";
+import { createContext } from "react";
 
 const FavoriteCollection = [[], () => {}];
 
-export const FavoriteContext = createContext(FavoriteCollection);
-
-export const FavoriteProvider = (props) => {
-  const favoriteHook = useState([]);
-  return (
-    <FavoriteContext.Provider value={favoriteHook}>
-      {props.children}
-    </FavoriteContext.Provider>
-  );
-};
+const FavoriteContext = createContext(FavoriteCollection);
 
 export default FavoriteContext;
