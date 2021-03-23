@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/pages/Home/Home";
 import PhotoList from "./components/pages/Photos/list-page/PhotoList";
+import PhotoDetail from "./components/pages/Photos/detail-page/PhotoDetail";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/photos" component={PhotoList} />
+          <Route path="/photo/:id" component={PhotoDetail} />
         </Switch>
       </div>
     </Router>
