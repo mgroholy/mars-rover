@@ -27,7 +27,7 @@ const RoverList = () => {
     <RoverContainer>
       {rovers.map((rover) => (
         <RoverCard to={`/rovers/${rover.name.toLowerCase()}`} key={rover.id}>
-          <RoverImg src={RoverCardImages[rover.name]} />
+          <RoverImg src={RoverCardImages[rover.name].portrait} />
           <RoverName>{rover.name}</RoverName>
         </RoverCard>
       ))}
