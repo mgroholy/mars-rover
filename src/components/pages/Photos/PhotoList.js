@@ -3,13 +3,14 @@ import axios from "axios";
 import styled from "styled-components";
 import PhotoItem from "./PhotoItem";
 import { PaginationBar, PaginationLink } from "./Pagination";
+import Filterbar from "./Filterbar";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const Container = styled.div`
   margin: 0 auto;
-  margin-top: 100px;
-  margin-bottom: 30px;
+  margin-top: 40px;
+  margin-bottom: 10px;
   width: 800px;
 `;
 
@@ -52,6 +53,7 @@ const PhotoList = () => {
 
   return (
     <div>
+      <Filterbar />
       <Container>{photoItems}</Container>
       <PaginationBar>
         <PaginationLink href="/" onClick={loadPrevious}>
