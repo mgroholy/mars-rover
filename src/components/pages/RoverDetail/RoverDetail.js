@@ -10,6 +10,7 @@ import {
   RoverDetailName,
   RoverDetailDescription,
   RoverDetailContent,
+  NasaButton,
 } from "./RoverDetailElements";
 
 const RoverDetail = () => {
@@ -52,11 +53,14 @@ const RoverDetail = () => {
               Photos taken: {rover.total_photos}
             </RoverDetailDescription>
             <RoverDetailDescription>
-              Date of most recent phot: {rover.max_date}
+              Date of most recent photo: {rover.max_date}
             </RoverDetailDescription>
             <RoverDetailDescription>
               Sols spent on Mars: {rover.max_sol}
             </RoverDetailDescription>
+            <NasaButton href="https://mars.nasa.gov/mer/" target="_blank">
+              Learn more at NASA
+            </NasaButton>
           </RoverDetailContent>
           <RoverDetailImg src={RoverCardImages[rover.name].normal} />
         </RoverDetailCard>
