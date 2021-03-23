@@ -15,7 +15,7 @@ const RoverList = () => {
 
   const fetchData = async (url) => {
     const response = await axios.get(
-      `${url}?api_key=${process.env.REACT_APP_MARS_ROVER_API_KEY}`
+      `${url}?api_key=${process.env.REACT_APP_API_KEY}`
     );
     setRovers(response.data.rovers);
     console.log(response);
@@ -26,7 +26,7 @@ const RoverList = () => {
   return (
     <RoverContainer>
       {rovers.map((rover) => (
-        <RoverCard to={`/rovers/${rover.id}`} key={rover.id}>
+        <RoverCard to={`/rovers/${rover.name.toLowerCase()}`} key={rover.id}>
           <RoverImg src={RoverCardImages[rover.name]} />
           <RoverName>{rover.name}</RoverName>
         </RoverCard>
