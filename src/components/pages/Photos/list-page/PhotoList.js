@@ -14,6 +14,13 @@ const Container = styled.div`
   width: 800px;
 `;
 
+const Alert = styled.div`
+  background: lightgoldenrodyellow;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 40px;
+`;
+
 const PhotoList = () => {
   const [photos, setPhotos] = useState([]);
   const [rover, setRover] = useState("curiosity");
@@ -31,6 +38,7 @@ const PhotoList = () => {
       );
       let lastDate = response.data.rover.max_date;
       setDate(lastDate);
+      setPage(1);
       setUrl(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
       );
@@ -42,7 +50,7 @@ const PhotoList = () => {
     const fetchData = async () => {
       const response = await axios.get(url);
       const data = response.data.photos;
-      if (data.length === 0) setEmpty(true);
+      data.length === 0 ? setEmpty(true) : setEmpty(false);
       setPhotos(data);
     };
     fetchData();
@@ -83,10 +91,16 @@ const PhotoList = () => {
     setRover(roverName);
   };
 
+  const warningMessage = (
+    <Alert>
+      <p>More photos for this date cannot be found.</p>
+    </Alert>
+  );
+
   return (
     <div>
       <Filterbar onFilterClick={filterByRover} />
-      <Container>{photoItems}</Container>
+      <Container>{isEmpty ? warningMessage : photoItems}</Container>
       <PaginationBar>
         <PaginationLink href="/" onClick={loadPrevious}>
           &lt;
