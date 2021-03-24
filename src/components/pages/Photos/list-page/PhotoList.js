@@ -105,6 +105,10 @@ const PhotoList = () => {
 
   const filterByRover = (e) => {
     let roverName = e.target.textContent;
+    document
+      .querySelectorAll(".filter-rover a")
+      .forEach((element) => element.classList.remove("selected"));
+    e.target.classList.add("selected");
     setRover(roverName);
   };
 

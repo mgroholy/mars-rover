@@ -16,6 +16,7 @@ const FilterRover = styled.div`
   padding: 10px;
   display: flex;
   float: left;
+  font-weight: bolder;
 `;
 
 const FilterDate = styled.div`
@@ -47,7 +48,7 @@ const Filterbar = (props) => {
   return (
     <FilterBar>
       <FilterRover className="filter-rover">
-        <NavLink to="#" onClick={props.onFilterClick}>
+        <NavLink to="#" className="selected" onClick={props.onFilterClick}>
           Curiosity
         </NavLink>
         <NavLink to="#" onClick={props.onFilterClick}>
