@@ -22,6 +22,7 @@ const PhotoList = () => {
   const [url, setUrl] = useState(
     `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
   );
+  const [isEmpty, setEmpty] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +41,9 @@ const PhotoList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(url);
-      setPhotos(response.data.photos);
+      const data = response.data.photos;
+      if (data.length === 0) setEmpty(true);
+      setPhotos(data);
     };
     fetchData();
   }, [url]);
