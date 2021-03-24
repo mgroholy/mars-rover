@@ -12,6 +12,7 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
+  background: whitesmoke;
   display: grid;
   height: 100%;
 `;
