@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./Filterbar.css";
+import reset from "../../../../images/reset.png";
 
 const FilterBar = styled.div`
   background-color: lightgray;
@@ -18,9 +19,20 @@ const FilterRover = styled.div`
 `;
 
 const FilterDate = styled.div`
-  padding: 10px;
+  padding: 7.5px;
   display: flex;
   float: right;
+`;
+
+const Input = styled.input`
+  border-radius: 5px;
+  height: 25px;
+`;
+
+const Image = styled.img`
+  height: 25px;
+  margin-left: 5px;
+  cursor: pointer;
 `;
 
 const Filterbar = (props) => {
@@ -49,11 +61,8 @@ const Filterbar = (props) => {
         </NavLink>
       </FilterRover>
       <FilterDate>
-        <input
-          onKeyDown={props.onKeyPressed}
-          placeholder={yesterday}
-          style={{ borderRadius: "5px" }}
-        />
+        <Input onKeyDown={props.onKeyPressed} placeholder={yesterday} />
+        <Image alt="reset-button" src={reset} onClick={props.onResetClick} />
       </FilterDate>
     </FilterBar>
   );

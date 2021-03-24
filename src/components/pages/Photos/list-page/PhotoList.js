@@ -117,6 +117,11 @@ const PhotoList = () => {
     }
   };
 
+  const resetDateToLatest = () => {
+    setIsDateFilterOn(false);
+    document.querySelector("input").value = "";
+  };
+
   const warningMessage = (
     <Alert>
       <p>
@@ -129,7 +134,11 @@ const PhotoList = () => {
 
   return (
     <div>
-      <Filterbar onFilterClick={filterByRover} onKeyPressed={filterByDate} />
+      <Filterbar
+        onFilterClick={filterByRover}
+        onKeyPressed={filterByDate}
+        onResetClick={resetDateToLatest}
+      />
       <Container>{isEmpty || isError ? warningMessage : photoItems}</Container>
       <PaginationBar>
         <PaginationLink href="/" onClick={loadPrevious}>
