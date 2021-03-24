@@ -24,21 +24,25 @@ const PhotoList = () => {
   );
 
   useEffect(() => {
-    axios
-      .get(
+    const fetchData = async () => {
+      const response = await axios.get(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}?api_key=${API_KEY}`
-      )
-      .then((response) => {
-        let lastDate = response.data.rover.max_date;
-        setDate(lastDate);
-        setUrl(
-          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
-        );
-      });
+      );
+      let lastDate = response.data.rover.max_date;
+      setDate(lastDate);
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
+      );
+    };
+    fetchData();
   }, [rover]);
 
   useEffect(() => {
-    axios.get(url).then((response) => setPhotos(response.data.photos));
+    const fetchData = async () => {
+      const response = await axios.get(url);
+      setPhotos(response.data.photos);
+    };
+    fetchData();
   }, [url]);
 
   const photoItems = photos.map((photo) => (
