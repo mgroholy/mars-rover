@@ -68,8 +68,7 @@ export const FavoriteSelectionCard = styled.div`
   margin: 20px;
   cursor: pointer;
   overflow: hidden;
-  transform: ${({ selected }) =>
-    selected === "true" ? "scale(1.15)" : "none"};
+  transform: ${({ selected }) => (selected ? "scale(1.15)" : "none")};
 
   &:hover {
     opacity: 0.7;

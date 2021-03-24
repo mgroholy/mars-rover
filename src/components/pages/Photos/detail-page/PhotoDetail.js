@@ -99,7 +99,6 @@ const PhotoDetail = (props) => {
               {hover ? <FilledIcon size={25} /> : <OutlineIcon size={25} />}
             </FavoriteIcon>
             <p>{favorited ? "Remove from favorites" : "Add to favorites"}</p>
-            {console.log(favorites)}
           </FavoriteContainer>
           <div style={{ display: "inline-block" }}>Earth date: {date}</div>
         </Description>

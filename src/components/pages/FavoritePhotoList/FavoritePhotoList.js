@@ -7,16 +7,6 @@ import FavoriteGallery from "./FavoriteGallery";
 const FavoritePhotoList = () => {
   const [favorites] = useContext(FavoriteContext);
 
-  // window.addEventListener("resize", () => {
-  //   if (window.innerWidth <= 1300) {
-  //     setNumberOfDisplayedPhotos(3);
-  //   } else if (window.innerWidth <= 1600) {
-  //     setNumberOfDisplayedPhotos(5);
-  //   } else {
-  //     setNumberOfDisplayedPhotos(7);
-  //   }
-  // });
-
   return (
     <div>
       <FavoriteContainer>

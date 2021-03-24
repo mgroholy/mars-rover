@@ -29,9 +29,7 @@ const FavoriteSelectionBar = ({ setHeroImg, heroImg, favorites }) => {
   };
 
   useEffect(() => {
-    if (favorites.length > 0) {
-      setDisplayedPhotos(favorites.slice(firstDisplayed, lastDisplayed));
-    }
+    setDisplayedPhotos(favorites.slice(firstDisplayed, lastDisplayed));
   }, [favorites, firstDisplayed, lastDisplayed]);
 
   return (
@@ -44,8 +42,9 @@ const FavoriteSelectionBar = ({ setHeroImg, heroImg, favorites }) => {
       <FavoriteSelection>
         {displayedPhotos.map((favorite) => (
           <FavoriteSelectionCard
+            key={favorite.id}
             onClick={() => setHeroImg(favorite)}
-            selected={favorite.id === heroImg.id ? "true" : "false"}
+            selected={favorite.id === heroImg.id ? true : false}
           >
             <FavoriteSelectionImage src={favorite.image} alt="mars" />
           </FavoriteSelectionCard>
