@@ -17,8 +17,8 @@ export const FavoriteCard = styled.div`
   overflow: hidden;
   background: #fff;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1), 1px 5px 20px rgba(0, 0, 0, 0.2);
 `;
@@ -94,7 +94,7 @@ export const FavoriteSidebar = styled.div`
   flex-direction: column;
 `;
 
-export const FavoriteGallery = styled.div`
+export const FavoriteGalleryElem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
