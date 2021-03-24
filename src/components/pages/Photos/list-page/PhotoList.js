@@ -31,6 +31,7 @@ const PhotoList = () => {
   );
   const [isEmpty, setIsEmpty] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isDateFilterOn, setIsDateFilterOn] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,14 +39,22 @@ const PhotoList = () => {
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}?api_key=${API_KEY}`
       );
       let lastDate = response.data.rover.max_date;
-      setDate(lastDate);
       setPage(1);
-      setUrl(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
-      );
+
+      if (isDateFilterOn) {
+        setUrl(
+          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=1&api_key=${API_KEY}`
+        );
+      } else {
+        setDate(lastDate);
+        setUrl(
+          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
+        );
+      }
     };
+
     fetchData();
-  }, [rover]);
+  }, [rover, date, isDateFilterOn]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,10 +112,8 @@ const PhotoList = () => {
     const isEnterPressed = e.keyCode === 13;
     if (isEnterPressed) {
       const dateInput = e.target.value;
+      setIsDateFilterOn(true);
       setDate(dateInput);
-      setUrl(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${dateInput}&page=${page}&api_key=${API_KEY}`
-      );
     }
   };
 
