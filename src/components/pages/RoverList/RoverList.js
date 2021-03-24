@@ -18,7 +18,6 @@ const RoverList = () => {
       `${url}?api_key=${process.env.REACT_APP_API_KEY}`
     );
     setRovers(response.data.rovers);
-    console.log(response);
   };
 
   useEffect(() => fetchData(url), [url]);

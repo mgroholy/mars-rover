@@ -29,7 +29,7 @@ const PhotoItem = ({ id, image, rover, date }) => {
       <Link
         to={{
           pathname: `/photo/${id}`,
-          state: { image, rover, date },
+          state: { id, image, rover, date },
         }}
       >
         <Image alt="mars" src={image} />

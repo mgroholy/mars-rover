@@ -25,7 +25,6 @@ const RoverDetail = () => {
       `${url}${roverName}?api_key=${process.env.REACT_APP_API_KEY}`
     );
     setRover(response.data.rover);
-    console.log(response.data.rover);
   };
 
   useEffect(() => fetchData(pathname), [pathname]);

@@ -7,7 +7,7 @@ import Filterbar from "./Filterbar";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-const Container = styled.div`
+export const Container = styled.div`
   margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 10px;
