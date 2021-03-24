@@ -60,18 +60,18 @@ const PhotoList = () => {
 
   const loadPrevious = (e) => {
     e.preventDefault();
-    let pageNumber = page - 1;
-    // TODO: condition
-    setPage(pageNumber);
-    setUrl(
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${pageNumber}&api_key=${API_KEY}`
-    );
+    if (page > 1) {
+      let pageNumber = page - 1;
+      setPage(pageNumber);
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${pageNumber}&api_key=${API_KEY}`
+      );
+    }
   };
 
   const loadNext = (e) => {
     e.preventDefault();
     let pageNumber = page + 1;
-    // TODO: condition
     setPage(page + 1);
     setUrl(
       `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${pageNumber}&api_key=${API_KEY}`
