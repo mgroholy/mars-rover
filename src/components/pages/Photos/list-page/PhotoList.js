@@ -29,7 +29,9 @@ const PhotoList = () => {
   const [url, setUrl] = useState(
     `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
   );
-  const [isEmpty, setEmpty] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isDateFilterOn, setIsDateFilterOn] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,22 +39,37 @@ const PhotoList = () => {
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}?api_key=${API_KEY}`
       );
       let lastDate = response.data.rover.max_date;
-      setDate(lastDate);
       setPage(1);
-      setUrl(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
-      );
+
+      if (isDateFilterOn) {
+        setUrl(
+          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=1&api_key=${API_KEY}`
+        );
+      } else {
+        setDate(lastDate);
+        setUrl(
+          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
+        );
+      }
     };
+
     fetchData();
-  }, [rover]);
+  }, [rover, date, isDateFilterOn]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(url);
-      const data = response.data.photos;
-      data.length === 0 ? setEmpty(true) : setEmpty(false);
-      setPhotos(data);
+      setIsError(false);
+
+      try {
+        const response = await axios.get(url);
+        const data = response.data.photos;
+        data.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
+        setPhotos(data);
+      } catch (error) {
+        setIsError(true);
+      }
     };
+
     fetchData();
   }, [url]);
 
@@ -88,19 +105,45 @@ const PhotoList = () => {
 
   const filterByRover = (e) => {
     let roverName = e.target.textContent;
+    document
+      .querySelectorAll(".filter-rover a")
+      .forEach((element) => element.classList.remove("selected"));
+    e.target.classList.add("selected");
     setRover(roverName);
+  };
+
+  const filterByDate = (e) => {
+    const isEnterPressed = e.keyCode === 13;
+    if (isEnterPressed) {
+      const dateInput = e.target.value;
+      setIsDateFilterOn(true);
+      setDate(dateInput);
+    }
+  };
+
+  const resetDateToLatest = () => {
+    setIsDateFilterOn(false);
+    document.querySelector("input").value = "";
   };
 
   const warningMessage = (
     <Alert>
-      <p>More photos for this date cannot be found.</p>
+      <p>
+        {isEmpty
+          ? "No (more) photos were found for this date."
+          : "Please enter a date in the format 'yyyy-mm-dd'."}
+      </p>
     </Alert>
   );
 
   return (
     <div>
-      <Filterbar onFilterClick={filterByRover} />
-      <Container>{isEmpty ? warningMessage : photoItems}</Container>
+      <Filterbar
+        onFilterClick={filterByRover}
+        onKeyPressed={filterByDate}
+        onResetClick={resetDateToLatest}
+      />
+      <Container>{isEmpty || isError ? warningMessage : photoItems}</Container>
       <PaginationBar>
         <PaginationLink href="/" onClick={loadPrevious}>
           &lt;

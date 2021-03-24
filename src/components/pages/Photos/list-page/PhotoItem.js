@@ -10,6 +10,7 @@ const Card = styled.div`
 
 const Image = styled.img`
   width: 120px;
+  max-height: 120px;
   border-radius: 10px;
   box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25),
     -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
