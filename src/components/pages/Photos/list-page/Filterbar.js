@@ -24,6 +24,14 @@ const FilterDate = styled.div`
 `;
 
 const Filterbar = (props) => {
+  const today = new Date();
+  const yesterday =
+    today.getFullYear() +
+    "-" +
+    (today.getMonth() + 1) +
+    "-" +
+    (today.getDate() - 1);
+
   return (
     <FilterBar>
       <FilterRover className="filter-rover">
@@ -41,7 +49,7 @@ const Filterbar = (props) => {
         </NavLink>
       </FilterRover>
       <FilterDate>
-        <input placeholder="2012-08-06" style={{ borderRadius: "5px" }} />
+        <input placeholder={yesterday} style={{ borderRadius: "5px" }} />
       </FilterDate>
     </FilterBar>
   );
