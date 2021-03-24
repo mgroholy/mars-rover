@@ -30,6 +30,7 @@ const PhotoList = () => {
     `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
   );
   const [isEmpty, setEmpty] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,11 +49,18 @@ const PhotoList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(url);
-      const data = response.data.photos;
-      data.length === 0 ? setEmpty(true) : setEmpty(false);
-      setPhotos(data);
+      setIsError(false);
+
+      try {
+        const response = await axios.get(url);
+        const data = response.data.photos;
+        data.length === 0 ? setEmpty(true) : setEmpty(false);
+        setPhotos(data);
+      } catch (error) {
+        setIsError(true);
+      }
     };
+
     fetchData();
   }, [url]);
 
@@ -93,14 +101,29 @@ const PhotoList = () => {
 
   const warningMessage = (
     <Alert>
-      <p>More photos for this date cannot be found.</p>
+      <p>
+        {isEmpty
+          ? "No (more) photos were found for this date."
+          : "Please enter a date in the format 'yyyy-mm-dd'."}
+      </p>
     </Alert>
   );
 
+  const filterByDate = (e) => {
+    const isEnterPressed = e.keyCode === 13;
+    if (isEnterPressed) {
+      const dateInput = e.target.value;
+      setDate(dateInput);
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${dateInput}&page=${page}&api_key=${API_KEY}`
+      );
+    }
+  };
+
   return (
     <div>
-      <Filterbar onFilterClick={filterByRover} />
-      <Container>{isEmpty ? warningMessage : photoItems}</Container>
+      <Filterbar onFilterClick={filterByRover} onKeyPressed={filterByDate} />
+      <Container>{isEmpty || isError ? warningMessage : photoItems}</Container>
       <PaginationBar>
         <PaginationLink href="/" onClick={loadPrevious}>
           &lt;

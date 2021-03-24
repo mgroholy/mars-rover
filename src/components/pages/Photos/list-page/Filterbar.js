@@ -49,7 +49,11 @@ const Filterbar = (props) => {
         </NavLink>
       </FilterRover>
       <FilterDate>
-        <input placeholder={yesterday} style={{ borderRadius: "5px" }} />
+        <input
+          onKeyDown={props.onKeyPressed}
+          placeholder={yesterday}
+          style={{ borderRadius: "5px" }}
+        />
       </FilterDate>
     </FilterBar>
   );
