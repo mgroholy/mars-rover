@@ -29,7 +29,6 @@ export const FavoriteHeroWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 70%;
-  /* background: blue; */
 `;
 
 export const FavoriteHeroImage = styled(Link)`
@@ -62,23 +61,24 @@ export const FavoriteSelection = styled.div`
   width: 100%;
 `;
 
-export const FavoriteSelectionCard = styled.img`
-  height: 150px;
+export const FavoriteSelectionCard = styled.div`
   width: 150px;
+  height: 150px;
   border-radius: 5px;
   margin: 20px;
-  /* background: grey; */
   cursor: pointer;
-  /* border: ${({ selected }) =>
-    selected === "true" ? "5px solid #ad6242" : "none"}; */
+  overflow: hidden;
   transform: ${({ selected }) =>
     selected === "true" ? "scale(1.15)" : "none"};
 
   &:hover {
-    /* transform: scale(1.05); */
     opacity: 0.7;
     transition: 0.3s ease-in-out;
   }
+`;
+
+export const FavoriteSelectionImage = styled.img`
+  height: 100%;
 `;
 
 export const SelectionDivider = styled.div`
@@ -92,7 +92,6 @@ export const FavoriteSidebar = styled.div`
   width: 40%;
   display: flex;
   flex-direction: column;
-  /* background: green; */
 `;
 
 export const FavoriteGallery = styled.div`
@@ -102,7 +101,6 @@ export const FavoriteGallery = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  /* background: red; */
 `;
 
 export const SidebarTitle = styled.h1`
