@@ -31,6 +31,7 @@ const PhotoList = () => {
   );
   const [isEmpty, setIsEmpty] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isDateFilterOn, setIsDateFilterOn] = useState(false);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const PhotoList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       setIsError(false);
 
       try {
@@ -68,6 +70,7 @@ const PhotoList = () => {
       } catch (error) {
         setIsError(true);
       }
+      setIsLoading(false);
     };
 
     fetchData();
@@ -136,6 +139,16 @@ const PhotoList = () => {
     </Alert>
   );
 
+  const displayPhotoContainer = () => {
+    if (isLoading) {
+      return "Loading...";
+    } else if (isEmpty || isError) {
+      return warningMessage;
+    } else {
+      return photoItems;
+    }
+  };
+
   return (
     <div>
       <Filterbar
@@ -143,7 +156,7 @@ const PhotoList = () => {
         onKeyPressed={filterByDate}
         onResetClick={resetDateToLatest}
       />
-      <Container>{isEmpty || isError ? warningMessage : photoItems}</Container>
+      <Container>{displayPhotoContainer()}</Container>
       <PaginationBar>
         <PaginationLink href="/" onClick={loadPrevious}>
           &lt;
