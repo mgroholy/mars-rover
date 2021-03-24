@@ -11,10 +11,14 @@ const PaginationLink = styled.a`
   font-weight: bold;
   text-decoration: none;
   padding: 8px 16px;
-  border: 2px solid #ad6242;
+  border: 3px solid #ad6242;
 
   :hover {
     color: #ad6242;
+  }
+
+  :last-child {
+    border-left: 0;
   }
 `;
 
