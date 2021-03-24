@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Loader from "react-loader-spinner";
 import PhotoItem from "./PhotoItem";
 import { PaginationBar, PaginationLink } from "./Pagination";
 import Filterbar from "./Filterbar";
@@ -139,14 +140,36 @@ const PhotoList = () => {
     </Alert>
   );
 
+  const loaderSpinner = (
+    <Loader
+      type="ThreeDots"
+      color="#ad6242"
+      height={50}
+      width={50}
+      style={{
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    />
+  );
+
+  const pagination = (
+    <PaginationBar key="pagination">
+      <PaginationLink href="/" onClick={loadPrevious}>
+        &lt;
+      </PaginationLink>
+      <PaginationLink href="/" onClick={loadNext}>
+        &gt;
+      </PaginationLink>
+    </PaginationBar>
+  );
+
   const displayPhotoContainer = () => {
-    if (isLoading) {
-      return "Loading...";
-    } else if (isEmpty || isError) {
-      return warningMessage;
-    } else {
-      return photoItems;
-    }
+    if (isLoading) return loaderSpinner;
+    else if (isEmpty || isError) return warningMessage;
+    else return [photoItems, pagination];
   };
 
   return (
@@ -157,14 +180,6 @@ const PhotoList = () => {
         onResetClick={resetDateToLatest}
       />
       <Container>{displayPhotoContainer()}</Container>
-      <PaginationBar>
-        <PaginationLink href="/" onClick={loadPrevious}>
-          &lt;
-        </PaginationLink>
-        <PaginationLink href="/" onClick={loadNext}>
-          &gt;
-        </PaginationLink>
-      </PaginationBar>
     </div>
   );
 };
