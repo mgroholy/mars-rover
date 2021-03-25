@@ -22,4 +22,17 @@ const PaginationLink = styled.a`
   }
 `;
 
-export { PaginationBar, PaginationLink };
+const Pagination = (props) => {
+  return (
+    <PaginationBar>
+      <PaginationLink href="/" onClick={props.onPreviousClick}>
+        &lt;
+      </PaginationLink>
+      <PaginationLink href="/" onClick={props.onNextClick}>
+        &gt;
+      </PaginationLink>
+    </PaginationBar>
+  );
+};
+
+export default Pagination;
