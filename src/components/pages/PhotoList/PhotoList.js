@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Loader from "react-loader-spinner";
 import PhotoItem from "./PhotoItem";
-import { PaginationBar, PaginationLink } from "./Pagination";
+import Pagination from "./Pagination";
 import Filterbar from "./Filterbar/Filterbar";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -160,21 +160,18 @@ const PhotoList = () => {
     />
   );
 
-  const pagination = (
-    <PaginationBar key="pagination">
-      <PaginationLink href="/" onClick={loadPrevious}>
-        &lt;
-      </PaginationLink>
-      <PaginationLink href="/" onClick={loadNext}>
-        &gt;
-      </PaginationLink>
-    </PaginationBar>
-  );
-
   const displayPhotoContainer = () => {
     if (isLoading) return loaderSpinner;
     else if (isEmpty || isError) return warningMessage;
-    else return [photoItems, pagination];
+    else
+      return [
+        photoItems,
+        <Pagination
+          onPreviousClick={loadPrevious}
+          onNextClick={loadNext}
+          key="pagination"
+        />,
+      ];
   };
 
   return (
