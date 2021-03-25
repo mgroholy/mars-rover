@@ -7,14 +7,17 @@ import {
   FavoriteSelectionImage,
   FavoriteSelectionWrapper,
 } from "./FavoriteListElements";
+import useCurrentWidth from "./useCurrentWidth";
 
 const FavoriteSelectionBar = ({ setHeroImg, heroImg, favorites }) => {
   const [displayedPhotos, setDisplayedPhotos] = useState([]);
-  const [numberOfDisplayedPhotos, setNumberOfDisplayedPhotos] = useState(7);
+  const [numberOfDisplayedPhotos, setNumberOfDisplayedPhotos] = useState(6);
   const [firstDisplayed, setFirstDisplayed] = useState(0);
   const [lastDisplayed, setLastDisplayed] = useState(
     firstDisplayed + numberOfDisplayedPhotos
   );
+
+  const width = useCurrentWidth();
 
   const nextPage = () => {
     setFirstDisplayed(firstDisplayed + numberOfDisplayedPhotos);
@@ -29,11 +32,29 @@ const FavoriteSelectionBar = ({ setHeroImg, heroImg, favorites }) => {
   };
 
   useEffect(() => {
+    // if (width < 1500) {
+    //   setNumberOfDisplayedPhotos(4);
+    //   setFirstDisplayed(0);
+    //   setLastDisplayed(firstDisplayed + numberOfDisplayedPhotos);
+    // } else {
+    //   setNumberOfDisplayedPhotos(6);
+    //   setFirstDisplayed(0);
+    //   setLastDisplayed(firstDisplayed + numberOfDisplayedPhotos);
+    // }
+
     setDisplayedPhotos(favorites.slice(firstDisplayed, lastDisplayed));
-  }, [favorites, firstDisplayed, lastDisplayed]);
+  }, [
+    favorites,
+    firstDisplayed,
+    lastDisplayed,
+    numberOfDisplayedPhotos,
+    width,
+  ]);
 
   return (
     <FavoriteSelectionWrapper>
+      {console.log(width)}
+      {console.log(numberOfDisplayedPhotos)}
       <Arrow>
         {firstDisplayed > 0 && (
           <IoIosArrowBack size={40} onClick={previousPage} />
