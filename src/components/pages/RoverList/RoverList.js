@@ -4,6 +4,7 @@ import {
   RoverCard,
   RoverImg,
   RoverName,
+  RoverCards,
 } from "./RoverListElements";
 import axios from "axios";
 import RoverCardImages from "./RoverCardImages";
@@ -24,12 +25,14 @@ const RoverList = () => {
 
   return (
     <RoverContainer>
-      {rovers.map((rover) => (
-        <RoverCard to={`/rovers/${rover.name.toLowerCase()}`} key={rover.id}>
-          <RoverImg src={RoverCardImages[rover.name].portrait} />
-          <RoverName>{rover.name}</RoverName>
-        </RoverCard>
-      ))}
+      <RoverCards>
+        {rovers.map((rover) => (
+          <RoverCard to={`/rovers/${rover.name.toLowerCase()}`} key={rover.id}>
+            <RoverImg src={RoverCardImages[rover.name].portrait} />
+            <RoverName>{rover.name}</RoverName>
+          </RoverCard>
+        ))}
+      </RoverCards>
     </RoverContainer>
   );
 };

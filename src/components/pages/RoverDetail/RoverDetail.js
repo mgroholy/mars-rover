@@ -11,6 +11,7 @@ import {
   RoverDetailDescription,
   RoverDetailContent,
   NasaButton,
+  RoverImgWrapper,
 } from "./RoverDetailElements";
 
 const RoverDetail = () => {
@@ -61,7 +62,9 @@ const RoverDetail = () => {
               Learn more at NASA
             </NasaButton>
           </RoverDetailContent>
-          <RoverDetailImg src={RoverCardImages[rover.name].normal} />
+          <RoverImgWrapper>
+            <RoverDetailImg src={RoverCardImages[rover.name].normal} />
+          </RoverImgWrapper>
         </RoverDetailCard>
       )}
     </RoverDetailContainer>

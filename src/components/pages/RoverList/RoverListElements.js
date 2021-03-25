@@ -6,17 +6,43 @@ export const RoverContainer = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  /* position: fixed; */
+`;
+
+export const RoverCards = styled.div`
+  display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding-left: 50px;
-  padding-right: 50px;
-  background-color: #f5f5f5;
+  width: 80%;
+  height: 100%;
+
+  @media screen and (max-width: 960px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+  }
+
+  @media screen and (max-width: 740px) {
+    padding-top: 10%;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: auto;
+    height: 90%;
+  }
 `;
 
 export const RoverCard = styled(Link)`
   position: relative;
   width: 22%;
   height: 70%;
+  max-height: 700px;
   overflow: hidden;
   border-radius: 5px;
   background: black;
@@ -27,6 +53,19 @@ export const RoverCard = styled(Link)`
     transition: 0.3s ease-in-out;
     box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
   }
+
+  @media screen and (max-width: 960px) {
+    width: 250px;
+    height: 250px;
+    margin: 20px;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 100%;
+    height: 100px;
+    margin: 0;
+    margin-top: 20px;
+  }
 `;
 
 export const RoverImg = styled.img`
@@ -34,6 +73,15 @@ export const RoverImg = styled.img`
   &:hover {
     opacity: 0.95;
     transition: 0.3s ease-in-out;
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+    height: auto;
+  }
+  @media screen and (max-width: 700px) {
+    width: 100%;
+    height: auto;
   }
 `;
 
@@ -51,5 +99,12 @@ export const RoverName = styled.h1`
 
   @media screen and (max-width: 1200px) {
     font-size: 24px;
+  }
+
+  @media screen and (max-width: 960px) {
+    margin-bottom: 215px;
+  }
+  @media screen and (max-width: 700px) {
+    margin-bottom: 65px;
   }
 `;
