@@ -20,7 +20,12 @@ export const HomeContent = styled.div`
   margin-right: 40%;
   margin-bottom: 20vh;
   width: 30%;
-  min-width: 300px;
+  min-width: 400px;
+  @media screen and (max-width: 700px) {
+    margin-right: 0;
+    min-width: 0;
+    width: 80%;
+  }
 `;
 
 export const HomeTitle = styled.h1`
@@ -30,6 +35,8 @@ export const HomeTitle = styled.h1`
 
   @media screen and (max-width: 1300px) {
     font-size: 48px;
+  }
+  @media screen and (max-width: 700px) {
   }
 `;
 
