@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Loader from "react-loader-spinner";
 import PhotoItem from "./PhotoItem";
 import Pagination from "./Pagination";
 import Filterbar from "./Filterbar/Filterbar";
 import Warning from "./Warning";
+import LoaderSpinner from "./LoaderSpinner";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -129,23 +129,8 @@ const PhotoList = () => {
     document.querySelector("input").value = "";
   };
 
-  const loaderSpinner = (
-    <Loader
-      type="ThreeDots"
-      color="#ad6242"
-      height={50}
-      width={50}
-      style={{
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-      }}
-    />
-  );
-
   const displayPhotoContainer = () => {
-    if (isLoading) return loaderSpinner;
+    if (isLoading) return <LoaderSpinner />;
     else if (isEmpty || isError)
       return <Warning incorrectDateFormat={isError} />;
     else
