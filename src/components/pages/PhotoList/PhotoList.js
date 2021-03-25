@@ -5,6 +5,7 @@ import Loader from "react-loader-spinner";
 import PhotoItem from "./PhotoItem";
 import Pagination from "./Pagination";
 import Filterbar from "./Filterbar/Filterbar";
+import Warning from "./Warning";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -13,13 +14,6 @@ export const Container = styled.div`
   margin-top: 40px;
   margin-bottom: 10px;
   width: 800px;
-`;
-
-const Alert = styled.div`
-  background: lightgoldenrodyellow;
-  text-align: center;
-  padding: 10px;
-  margin-bottom: 40px;
 `;
 
 const PhotoList = () => {
@@ -135,16 +129,6 @@ const PhotoList = () => {
     document.querySelector("input").value = "";
   };
 
-  const warningMessage = (
-    <Alert>
-      <p>
-        {isEmpty
-          ? "No (more) photos were found for this date."
-          : "Please enter a date in the format 'yyyy-mm-dd'."}
-      </p>
-    </Alert>
-  );
-
   const loaderSpinner = (
     <Loader
       type="ThreeDots"
@@ -162,7 +146,8 @@ const PhotoList = () => {
 
   const displayPhotoContainer = () => {
     if (isLoading) return loaderSpinner;
-    else if (isEmpty || isError) return warningMessage;
+    else if (isEmpty || isError)
+      return <Warning incorrectDateFormat={isError} />;
     else
       return [
         photoItems,
