@@ -31,30 +31,24 @@ const PhotoList = () => {
   const didMountRef = useRef(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMaxDate = async () => {
       const response = await axios.get(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}?api_key=${API_KEY}`
       );
       let lastDate = response.data.rover.max_date;
-      setPage(1);
 
-      if (isDateFilterOn) {
-        setUrl(
-          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=1&api_key=${API_KEY}`
-        );
-      } else {
-        setDate(lastDate);
-        setUrl(
-          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
-        );
-      }
+      setDate(lastDate);
+      setPage(1);
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
+      );
     };
 
-    fetchData();
-  }, [rover, date, isDateFilterOn]);
+    if (!isDateFilterOn) fetchMaxDate();
+  }, [rover, isDateFilterOn]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPhotos = async () => {
       setIsLoading(true);
       setIsError(false);
 
@@ -70,7 +64,7 @@ const PhotoList = () => {
     };
 
     if (didMountRef.current) {
-      fetchData();
+      fetchPhotos();
     } else {
       didMountRef.current = true;
     }
@@ -113,6 +107,12 @@ const PhotoList = () => {
       .forEach((element) => element.classList.remove("selected"));
     e.target.classList.add("selected");
     setRover(roverName);
+    setPage(1);
+    if (isDateFilterOn) {
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&page=1&api_key=${API_KEY}`
+      );
+    }
   };
 
   const filterByDate = (e) => {
@@ -121,6 +121,10 @@ const PhotoList = () => {
       const dateInput = e.target.value;
       setIsDateFilterOn(true);
       setDate(dateInput);
+      setPage(1);
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${dateInput}&page=1&api_key=${API_KEY}`
+      );
     }
   };
 
