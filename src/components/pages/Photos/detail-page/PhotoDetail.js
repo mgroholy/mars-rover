@@ -12,9 +12,8 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  background: whitesmoke;
   display: grid;
-  height: 100%;
+  margin-top: 58px; // Navbar height + 10px (upper frame)
 `;
 
 const Description = styled.div`
@@ -32,7 +31,8 @@ const Description = styled.div`
 
 const Image = styled.img`
   max-width: 100%;
-  max-height: 100vh;
+  max-height: calc(100vh - 68px); // Navbar height + 20px (bottom frame)
+  border: 10px #333 solid;
   margin: auto;
 `;
 
