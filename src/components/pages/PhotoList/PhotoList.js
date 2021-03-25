@@ -180,6 +180,7 @@ const PhotoList = () => {
         onFilterClick={filterByRover}
         onKeyPressed={filterByDate}
         onResetClick={resetDateToLatest}
+        date={date}
       />
       <Container>{displayPhotoContainer()}</Container>
     </div>

@@ -10,14 +10,6 @@ import "./Filterbar.css";
 import reset from "../../../../images/reset.png";
 
 const Filterbar = (props) => {
-  const today = new Date();
-  const yesterday =
-    today.getFullYear() +
-    "-" +
-    (today.getMonth() + 1) +
-    "-" +
-    (today.getDate() - 1);
-
   return (
     <FilterBar>
       <FilterRover className="filter-rover">
@@ -35,7 +27,7 @@ const Filterbar = (props) => {
         </NavLink>
       </FilterRover>
       <FilterDate>
-        <Input onKeyDown={props.onKeyPressed} placeholder={yesterday} />
+        <Input onKeyDown={props.onKeyPressed} placeholder={props.date} />
         <Image alt="reset-button" src={reset} onClick={props.onResetClick} />
       </FilterDate>
     </FilterBar>
