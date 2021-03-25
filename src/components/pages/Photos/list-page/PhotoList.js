@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Loader from "react-loader-spinner";
@@ -25,15 +25,16 @@ const Alert = styled.div`
 const PhotoList = () => {
   const [photos, setPhotos] = useState([]);
   const [rover, setRover] = useState("curiosity");
-  const [date, setDate] = useState("2021-03-22");
+  const [date, setDate] = useState("");
   const [page, setPage] = useState(1);
-  const [url, setUrl] = useState(
-    `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
-  );
+  const [url, setUrl] = useState("");
+
   const [isEmpty, setIsEmpty] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDateFilterOn, setIsDateFilterOn] = useState(false);
+
+  const didMountRef = useRef(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,7 +75,11 @@ const PhotoList = () => {
       setIsLoading(false);
     };
 
-    fetchData();
+    if (didMountRef.current) {
+      fetchData();
+    } else {
+      didMountRef.current = true;
+    }
   }, [url]);
 
   const photoItems = photos.map((photo) => (
