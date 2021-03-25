@@ -1,40 +1,13 @@
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import {
+  FilterBar,
+  FilterRover,
+  FilterDate,
+  Input,
+  Image,
+} from "./FilterbarElements";
 import "./Filterbar.css";
-import reset from "../../../images/reset.png";
-
-const FilterBar = styled.div`
-  background-color: lightgray;
-  height: 40px;
-  width: 800px;
-  margin: 0 auto;
-  margin-top: 100px;
-  border-radius: 10px;
-`;
-
-const FilterRover = styled.div`
-  padding: 10px;
-  display: flex;
-  float: left;
-  font-weight: bolder;
-`;
-
-const FilterDate = styled.div`
-  padding: 7.5px;
-  display: flex;
-  float: right;
-`;
-
-const Input = styled.input`
-  border-radius: 5px;
-  height: 25px;
-`;
-
-const Image = styled.img`
-  height: 25px;
-  margin-left: 5px;
-  cursor: pointer;
-`;
+import reset from "../../../../images/reset.png";
 
 const Filterbar = (props) => {
   const today = new Date();
