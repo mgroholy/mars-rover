@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import PhotoItem from "./PhotoItem";
-import { PaginationBar, PaginationLink } from "./Pagination";
-import Filterbar from "./Filterbar";
+import Pagination from "./Pagination";
+import Filterbar from "./Filterbar/Filterbar";
+import Warning from "./Warning";
+import LoaderSpinner from "./LoaderSpinner";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -14,50 +16,40 @@ export const Container = styled.div`
   width: 800px;
 `;
 
-const Alert = styled.div`
-  background: lightgoldenrodyellow;
-  text-align: center;
-  padding: 10px;
-  margin-bottom: 40px;
-`;
-
 const PhotoList = () => {
   const [photos, setPhotos] = useState([]);
   const [rover, setRover] = useState("curiosity");
-  const [date, setDate] = useState("2021-03-22");
+  const [date, setDate] = useState("");
   const [page, setPage] = useState(1);
-  const [url, setUrl] = useState(
-    `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=${page}&api_key=${API_KEY}`
-  );
+  const [url, setUrl] = useState("");
+
   const [isEmpty, setIsEmpty] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isDateFilterOn, setIsDateFilterOn] = useState(false);
 
+  const didMountRef = useRef(false);
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMaxDate = async () => {
       const response = await axios.get(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}?api_key=${API_KEY}`
       );
       let lastDate = response.data.rover.max_date;
-      setPage(1);
 
-      if (isDateFilterOn) {
-        setUrl(
-          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&page=1&api_key=${API_KEY}`
-        );
-      } else {
-        setDate(lastDate);
-        setUrl(
-          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
-        );
-      }
+      setDate(lastDate);
+      setPage(1);
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${lastDate}&page=1&api_key=${API_KEY}`
+      );
     };
 
-    fetchData();
-  }, [rover, date, isDateFilterOn]);
+    if (!isDateFilterOn) fetchMaxDate();
+  }, [rover, isDateFilterOn]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPhotos = async () => {
+      setIsLoading(true);
       setIsError(false);
 
       try {
@@ -68,9 +60,14 @@ const PhotoList = () => {
       } catch (error) {
         setIsError(true);
       }
+      setIsLoading(false);
     };
 
-    fetchData();
+    if (didMountRef.current) {
+      fetchPhotos();
+    } else {
+      didMountRef.current = true;
+    }
   }, [url]);
 
   const photoItems = photos.map((photo) => (
@@ -110,6 +107,12 @@ const PhotoList = () => {
       .forEach((element) => element.classList.remove("selected"));
     e.target.classList.add("selected");
     setRover(roverName);
+    setPage(1);
+    if (isDateFilterOn) {
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&page=1&api_key=${API_KEY}`
+      );
+    }
   };
 
   const filterByDate = (e) => {
@@ -118,6 +121,10 @@ const PhotoList = () => {
       const dateInput = e.target.value;
       setIsDateFilterOn(true);
       setDate(dateInput);
+      setPage(1);
+      setUrl(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${dateInput}&page=1&api_key=${API_KEY}`
+      );
     }
   };
 
@@ -126,15 +133,20 @@ const PhotoList = () => {
     document.querySelector("input").value = "";
   };
 
-  const warningMessage = (
-    <Alert>
-      <p>
-        {isEmpty
-          ? "No (more) photos were found for this date."
-          : "Please enter a date in the format 'yyyy-mm-dd'."}
-      </p>
-    </Alert>
-  );
+  const displayPhotoContainer = () => {
+    if (isLoading) return <LoaderSpinner />;
+    else if (isEmpty || isError)
+      return <Warning incorrectDateFormat={isError} />;
+    else
+      return [
+        photoItems,
+        <Pagination
+          onPreviousClick={loadPrevious}
+          onNextClick={loadNext}
+          key="pagination"
+        />,
+      ];
+  };
 
   return (
     <div>
@@ -142,16 +154,9 @@ const PhotoList = () => {
         onFilterClick={filterByRover}
         onKeyPressed={filterByDate}
         onResetClick={resetDateToLatest}
+        date={date}
       />
-      <Container>{isEmpty || isError ? warningMessage : photoItems}</Container>
-      <PaginationBar>
-        <PaginationLink href="/" onClick={loadPrevious}>
-          &lt;
-        </PaginationLink>
-        <PaginationLink href="/" onClick={loadNext}>
-          &gt;
-        </PaginationLink>
-      </PaginationBar>
+      <Container>{displayPhotoContainer()}</Container>
     </div>
   );
 };
