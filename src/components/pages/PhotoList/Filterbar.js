@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./Filterbar.css";
-import reset from "../../../../images/reset.png";
+import reset from "../../../images/reset.png";
 
 const FilterBar = styled.div`
   background-color: lightgray;

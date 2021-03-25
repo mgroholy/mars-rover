@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { FaRegStar, FaStar, FaRegTrashAlt, FaTrashAlt } from "react-icons/fa";
-import FavoriteContext from "../../../context/FavoriteContext";
+import FavoriteContext from "../../context/FavoriteContext";
 
 const Container = styled.div`
   margin: 0 auto;
