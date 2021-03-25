@@ -1,0 +1,13 @@
+.filter-rover a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.filter-rover a:hover {
+  color: #ad6242;
+}
+
+.filter-rover .selected {
+  color: #ad6242;
+}
