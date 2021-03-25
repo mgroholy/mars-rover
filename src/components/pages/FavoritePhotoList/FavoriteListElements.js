@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const FavoriteContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -12,6 +12,7 @@ export const FavoriteContainer = styled.div`
   @media screen and (max-width: 1000px) {
     min-height: 100vh;
     height: auto;
+    align-items: flex-start;
   }
 `;
 
@@ -28,9 +29,10 @@ export const FavoriteCard = styled.div`
   box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1), 1px 5px 20px rgba(0, 0, 0, 0.2);
 
   @media screen and (max-width: 1000px) {
-    margin-top: 100px;
-    margin-bottom: 100px;
-    width: 90%;
+    margin: 0;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    width: 95%;
   }
 `;
 
@@ -44,6 +46,7 @@ export const FavoriteHeroWrapper = styled.div`
   @media screen and (max-width: 1000px) {
     flex-direction: column;
     justify-content: space-around;
+    padding-top: 20px;
   }
 `;
 
@@ -51,6 +54,9 @@ export const FavoriteHeroImage = styled(Link)`
   height: 90%;
   border-radius: 5px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   img {
     height: 100%;
@@ -61,8 +67,8 @@ export const FavoriteHeroImage = styled(Link)`
   }
 
   @media screen and (max-width: 1000px) {
-    max-height: 300px;
     width: 100%;
+    min-height: 70%;
 
     img {
       width: 100%;
@@ -78,10 +84,12 @@ export const HeroImageWrapper = styled.div`
   height: 100%;
 
   @media screen and (max-width: 1000px) {
-    height: 70%;
+    min-width: 90%;
+    min-height: 40vh;
+    max-height: 40vh;
+    width: 90%;
     border-radius: 5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    flex-direction: column;
   }
 `;
 
@@ -114,6 +122,7 @@ export const FavoriteSelectionCard = styled.div`
   @media screen and (max-width: 1000px) {
     width: 60px;
     height: 60px;
+    transform: ${({ selected }) => (selected ? "scale(1.35)" : "none")};
   }
 `;
 
@@ -169,7 +178,6 @@ export const SidebarDescription = styled.div`
   @media screen and (max-width: 1000px) {
     flex-direction: column;
     line-height: 1.5rem;
-    /* margin: 0; */
   }
 `;
 
