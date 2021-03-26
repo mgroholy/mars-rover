@@ -9,7 +9,14 @@ export const RoverContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
-  /* position: fixed; */
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    height: auto;
+    min-height: 100vh;
+  }
 `;
 
 export const RoverCards = styled.div`
@@ -20,7 +27,7 @@ export const RoverCards = styled.div`
   width: 80%;
   height: 100%;
 
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 992px) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
@@ -28,13 +35,13 @@ export const RoverCards = styled.div`
     height: 60%;
   }
 
-  @media screen and (max-width: 740px) {
-    padding-top: 10%;
+  @media screen and (max-width: 768px) {
+    padding-top: 50px;
     flex-direction: column;
     justify-content: left;
     align-items: center;
-    flex-wrap: auto;
-    height: 90%;
+    min-height: 100%;
+    padding-bottom: 30px;
   }
 `;
 
@@ -54,15 +61,16 @@ export const RoverCard = styled(Link)`
     box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
   }
 
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 992px) {
     width: 250px;
     height: 250px;
     margin: 20px;
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
-    height: 100px;
+    height: 18vh;
+    min-height: 100px;
     margin: 0;
     margin-top: 20px;
   }
@@ -75,11 +83,11 @@ export const RoverImg = styled.img`
     transition: 0.3s ease-in-out;
   }
 
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 992px) {
     width: 100%;
     height: auto;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
     height: auto;
   }
@@ -96,15 +104,16 @@ export const RoverName = styled.h1`
   background: transparent;
   color: #fff;
   font-size: 30px;
+  font-size: min(2vw, 30px);
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 992px) {
+    margin-bottom: 215px;
     font-size: 24px;
   }
-
-  @media screen and (max-width: 960px) {
-    margin-bottom: 215px;
-  }
-  @media screen and (max-width: 700px) {
-    margin-bottom: 65px;
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+    top: 0;
+    bottom: auto;
+    margin-top: 2px;
   }
 `;
