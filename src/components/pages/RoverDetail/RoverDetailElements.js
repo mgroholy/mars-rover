@@ -109,6 +109,8 @@ export const NasaButton = styled.a`
   @media screen and (max-width: 1000px) {
     width: 80%;
     min-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 
     &:active {
       background: transparent;
@@ -122,11 +124,6 @@ export const NasaButton = styled.a`
       background: #ad6242;
       color: #f5f5f5ff;
     }
-  }
-
-  @media screen and (max-width: 768px) {
-    margin-left: auto;
-    margin-right: auto;
   }
 `;
 
@@ -140,6 +137,7 @@ export const BackButton = styled.button`
   margin-top: 10px;
   font-weight: bold;
   color: #f5f5f5ff;
+  cursor: pointer;
 
   &:hover {
     background: transparent;
@@ -149,8 +147,7 @@ export const BackButton = styled.button`
   }
 
   @media screen and (max-width: 1000px) {
-    /* width: 80%;
-    min-width: 200px; */
+    margin-left: 20px;
 
     &:active {
       background: transparent;
@@ -164,10 +161,6 @@ export const BackButton = styled.button`
       background: #ad6242;
       color: #f5f5f5ff;
     }
-  }
-
-  @media screen and (max-width: 768px) {
-    margin-left: 20px;
   }
 `;
 
