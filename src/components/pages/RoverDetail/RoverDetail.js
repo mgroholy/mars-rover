@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import RoverCardImages from "../RoverList/RoverCardImages";
 import RoverDescription from "./RoverDescription";
 import {
@@ -12,6 +12,7 @@ import {
   RoverDetailContent,
   NasaButton,
   RoverImgWrapper,
+  BackButton,
 } from "./RoverDetailElements";
 
 const RoverDetail = () => {
@@ -28,6 +29,8 @@ const RoverDetail = () => {
     setRover(response.data.rover);
   };
 
+  const goBack = useHistory().goBack;
+
   useEffect(() => fetchData(pathname), [pathname]);
 
   return (
@@ -35,6 +38,7 @@ const RoverDetail = () => {
       {rover.name && (
         <RoverDetailCard>
           <RoverDetailContent>
+            <BackButton onClick={goBack}>Back</BackButton>
             <RoverDetailName>{rover.name}</RoverDetailName>
             <RoverDetailDescription>
               {RoverDescription[rover.name.toLowerCase()]}
