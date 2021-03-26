@@ -9,7 +9,6 @@ export const RoverContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
-  /* position: fixed; */
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -103,15 +102,19 @@ export const RoverName = styled.h1`
   background: transparent;
   color: #fff;
   font-size: 30px;
+  font-size: 2vw;
+  /* font-size: min(max(24px, 4vw), 30px); */
 
-  @media screen and (max-width: 1200px) {
-    font-size: 24px;
+  @media screen and (min-width: 1600px) {
+    font-size: 30px;
   }
 
   @media screen and (max-width: 992px) {
     margin-bottom: 215px;
+    font-size: 24px;
   }
   @media screen and (max-width: 768px) {
     margin-bottom: 65px;
+    font-size: 24px;
   }
 `;
