@@ -102,12 +102,7 @@ export const RoverName = styled.h1`
   background: transparent;
   color: #fff;
   font-size: 30px;
-  font-size: 2vw;
-  /* font-size: min(max(24px, 4vw), 30px); */
-
-  @media screen and (min-width: 1600px) {
-    font-size: 30px;
-  }
+  font-size: min(2vw, 30px);
 
   @media screen and (max-width: 992px) {
     margin-bottom: 215px;
