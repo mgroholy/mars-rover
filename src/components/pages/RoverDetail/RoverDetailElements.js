@@ -27,7 +27,8 @@ export const RoverDetailCard = styled.div`
   @media screen and (max-width: 1000px) {
     flex-direction: column;
     height: auto;
-    margin-top: 100px;
+    width: 95%;
+    margin-top: 70px;
     margin-bottom: 100px;
   }
 `;
@@ -80,7 +81,7 @@ export const RoverDetailContent = styled.div`
     min-width: 0;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     margin: 0;
   }
 `;
@@ -121,6 +122,52 @@ export const NasaButton = styled.a`
       background: #ad6242;
       color: #f5f5f5ff;
     }
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+export const BackButton = styled.button`
+  border-radius: 50px;
+  height: 40px;
+  width: 100px;
+  border: none;
+  background: #ad6242;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #f5f5f5ff;
+
+  &:hover {
+    background: transparent;
+    border: 4px solid #ad6242;
+    color: #ad6242;
+    transition: background 0.3s ease;
+  }
+
+  @media screen and (max-width: 1000px) {
+    /* width: 80%;
+    min-width: 200px; */
+
+    &:active {
+      background: transparent;
+      border: 4px solid #ad6242;
+      color: #ad6242;
+      transition: background 0.3s ease;
+    }
+
+    &:hover {
+      border: none;
+      background: #ad6242;
+      color: #f5f5f5ff;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-left: 20px;
   }
 `;
 
