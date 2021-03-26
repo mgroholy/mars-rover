@@ -14,6 +14,7 @@ const NavBar = styled.div`
   top: 0;
   height: 51px;
   width: 100%;
+  z-index: 10;
 `;
 
 const Image = styled.img`
