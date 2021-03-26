@@ -53,6 +53,7 @@ export const RoverDetailName = styled.h1`
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 10px;
+    font-size: min(8vw, 36px);
   }
 `;
 
