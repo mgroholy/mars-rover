@@ -37,6 +37,10 @@ export const Container = styled.div`
   border-radius: 5px;
 
   transition: left 0.3s ease-in-out;
+
+  @media screen and (max-height: 576px) {
+    height: 60%;
+  }
 `;
 
 export const FilterOptions = styled.ul`
@@ -60,5 +64,9 @@ export const RoverLink = styled(NavLink)`
 
   :hover {
     color: #ad6242;
+  }
+
+  @media screen and (max-height: 576px) {
+    margin: 10px;
   }
 `;
