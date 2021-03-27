@@ -118,7 +118,7 @@ const PhotoList = () => {
     e.target.classList.add("selected");
     setRover(roverName);
     setPage(1);
-    if (isDateFilterOn) {
+    if (isDateFilterOn || roverName === rover) {
       setUrl(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&page=1&api_key=${API_KEY}`
       );
