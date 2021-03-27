@@ -8,6 +8,8 @@ import {
   Button,
   FavoriteContainer,
   FavoriteIcon,
+  RoverDetail,
+  DateDetail,
 } from "./PhotoDetailElements";
 import { FaRegStar, FaStar, FaRegTrashAlt, FaTrashAlt } from "react-icons/fa";
 import FavoriteContext from "../../context/FavoriteContext";
@@ -46,7 +48,7 @@ const PhotoDetail = (props) => {
       <Image alt="mars-quality" src={image} />
       <Container>
         <Description>
-          <div style={{ display: "inline-block" }}>Rover: {rover}</div>
+          <RoverDetail>Rover: {rover}</RoverDetail>
           <FavoriteContainer
             onMouseEnter={onHover}
             onMouseLeave={onHover}
@@ -57,7 +59,7 @@ const PhotoDetail = (props) => {
             </FavoriteIcon>
             <p>{favorited ? "Remove from favorites" : "Add to favorites"}</p>
           </FavoriteContainer>
-          <div style={{ display: "inline-block" }}>Earth date: {date}</div>
+          <DateDetail>Earth date: {date}</DateDetail>
         </Description>
         <Button onClick={useHistory().goBack}>&lt; Go back</Button>
       </Container>
