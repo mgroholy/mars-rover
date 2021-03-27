@@ -110,7 +110,7 @@ const PhotoList = () => {
   };
 
   const filterByRover = (e) => {
-    toggleMobileFilter();
+    if (isFilterOpen) setIsFilterOpen(false);
     let roverName = e.target.textContent;
     document
       .querySelectorAll(".filter-rover a")
