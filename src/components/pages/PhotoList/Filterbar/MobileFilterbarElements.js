@@ -26,7 +26,7 @@ export const Container = styled.div`
   display: flex;
   position: absolute;
   left: ${({ isFilterOpen }) => (isFilterOpen ? "0" : "-100%")};
-  top: 150px;
+  top: 130px;
   background: lightgray;
   flex-direction: column;
   justify-content: center;

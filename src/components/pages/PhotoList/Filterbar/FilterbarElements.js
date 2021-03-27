@@ -10,6 +10,7 @@ export const FilterBar = styled.div`
 
   @media screen and (max-width: 800px) {
     width: 90vw;
+    margin-top: 80px;
   }
 `;
 

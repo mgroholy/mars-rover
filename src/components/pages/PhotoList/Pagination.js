@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 const PaginationBar = styled.div`
-  position: absolute;
-  left: 47%;
+  margin-top: 25px;
 `;
 
 const PaginationLink = styled.a`
