@@ -34,7 +34,7 @@ const PhotoList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDateFilterOn, setIsDateFilterOn] = useState(false);
 
-  const didMountRef = useRef(false);
+  const isFirstRunSkipped = useRef(false);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const toggleMobileFilter = () => setIsFilterOpen(!isFilterOpen);
@@ -72,10 +72,10 @@ const PhotoList = () => {
       setIsLoading(false);
     };
 
-    if (didMountRef.current) {
+    if (isFirstRunSkipped.current) {
       fetchPhotos();
     } else {
-      didMountRef.current = true;
+      isFirstRunSkipped.current = true;
     }
   }, [url]);
 
