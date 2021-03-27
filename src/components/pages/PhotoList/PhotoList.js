@@ -10,10 +10,16 @@ import LoaderSpinner from "./LoaderSpinner";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const Container = styled.div`
-  margin: 0 auto;
-  margin-top: 40px;
+  text-align: center;
+  margin: auto;
+  margin-top: 25px;
   margin-bottom: 10px;
   width: 800px;
+
+  @media screen and (max-width: 800px) {
+    margin-top: 15px;
+    width: 100%;
+  }
 `;
 
 const PhotoList = () => {

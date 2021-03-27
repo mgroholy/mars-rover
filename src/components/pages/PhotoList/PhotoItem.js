@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Card = styled.div`
-  margin-bottom: 30px;
-  margin-left: 30px;
+  margin: 15px;
   display: inline-block;
+
+  @media screen and (max-width: 576px) {
+    margin: 10px;
+  }
 `;
 
 const Image = styled.img`
@@ -20,6 +23,21 @@ const Image = styled.img`
     transform: scale(0.9, 0.9);
     box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
       -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 85px;
+    max-height: 85px;
+    border-radius: 6.5px;
+    box-shadow: 3px 3px 20px 4.5px rgba(0, 0, 0, 0.25),
+      -3px -3px 20px 4.5px rgba(0, 0, 0, 0.22);
+    transition: 0.4s;
+
+    :hover {
+      transform: scale(0.9, 0.9);
+      box-shadow: 3px 3px 20px 4.5px rgba(0, 0, 0, 0.25),
+        -3px -3px 20px 4.5px rgba(0, 0, 0, 0.22);
+    }
   }
 `;
 
