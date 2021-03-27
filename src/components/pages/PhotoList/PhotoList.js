@@ -30,6 +30,9 @@ const PhotoList = () => {
 
   const didMountRef = useRef(false);
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const toggleMobileFilter = () => setIsFilterOpen(!isFilterOpen);
+
   useEffect(() => {
     const fetchMaxDate = async () => {
       const response = await axios.get(
@@ -101,6 +104,7 @@ const PhotoList = () => {
   };
 
   const filterByRover = (e) => {
+    toggleMobileFilter();
     let roverName = e.target.textContent;
     document
       .querySelectorAll(".filter-rover a")
@@ -151,6 +155,8 @@ const PhotoList = () => {
   return (
     <div>
       <Filterbar
+        onToggleClick={toggleMobileFilter}
+        isFilterOpen={isFilterOpen}
         onFilterClick={filterByRover}
         onKeyPressed={filterByDate}
         onResetClick={resetDateToLatest}

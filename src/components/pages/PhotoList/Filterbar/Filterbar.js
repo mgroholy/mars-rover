@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FilterBar,
@@ -14,10 +13,6 @@ import { MobileFilterbar } from "./MobileFilterbar";
 import { MobileIcon, MobileText } from "./MobileFilterbarElements";
 
 const Filterbar = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMobileFilter = () => setIsOpen(!isOpen);
-
   return (
     <div>
       <FilterBar>
@@ -40,15 +35,15 @@ const Filterbar = (props) => {
           <Image alt="reset-button" src={reset} onClick={props.onResetClick} />
         </FilterDate>
 
-        <MobileIcon onClick={toggleMobileFilter}>
-          {isOpen ? <FaTimes size={20} /> : <FaFilter size={20} />}
+        <MobileIcon onClick={props.onToggleClick}>
+          {props.isFilterOpen ? <FaTimes size={20} /> : <FaFilter size={20} />}
           <MobileText>Rovers</MobileText>
         </MobileIcon>
       </FilterBar>
 
       <MobileFilterbar
-        isOpen={isOpen}
-        toggleMobileFilter={toggleMobileFilter}
+        isFilterOpen={props.isFilterOpen}
+        onFilterClick={props.onFilterClick}
       />
     </div>
   );

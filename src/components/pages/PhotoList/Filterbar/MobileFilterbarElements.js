@@ -25,7 +25,7 @@ export const MobileText = styled.div`
 export const Container = styled.div`
   display: flex;
   position: absolute;
-  left: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
+  left: ${({ isFilterOpen }) => (isFilterOpen ? "0" : "-100%")};
   top: 150px;
   background: lightgray;
   flex-direction: column;
