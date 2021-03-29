@@ -10,10 +10,16 @@ import LoaderSpinner from "./LoaderSpinner";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const Container = styled.div`
-  margin: 0 auto;
-  margin-top: 40px;
+  text-align: center;
+  margin: auto;
+  margin-top: 25px;
   margin-bottom: 10px;
   width: 800px;
+
+  @media screen and (max-width: 800px) {
+    margin-top: 15px;
+    width: 100%;
+  }
 `;
 
 const PhotoList = () => {
@@ -28,7 +34,10 @@ const PhotoList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDateFilterOn, setIsDateFilterOn] = useState(false);
 
-  const didMountRef = useRef(false);
+  const isFirstRunSkipped = useRef(false);
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const toggleMobileFilter = () => setIsFilterOpen(!isFilterOpen);
 
   useEffect(() => {
     const fetchMaxDate = async () => {
@@ -63,10 +72,10 @@ const PhotoList = () => {
       setIsLoading(false);
     };
 
-    if (didMountRef.current) {
+    if (isFirstRunSkipped.current) {
       fetchPhotos();
     } else {
-      didMountRef.current = true;
+      isFirstRunSkipped.current = true;
     }
   }, [url]);
 
@@ -101,6 +110,7 @@ const PhotoList = () => {
   };
 
   const filterByRover = (e) => {
+    if (isFilterOpen) setIsFilterOpen(false);
     let roverName = e.target.textContent;
     document
       .querySelectorAll(".filter-rover a")
@@ -108,7 +118,7 @@ const PhotoList = () => {
     e.target.classList.add("selected");
     setRover(roverName);
     setPage(1);
-    if (isDateFilterOn) {
+    if (isDateFilterOn || roverName === rover) {
       setUrl(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&page=1&api_key=${API_KEY}`
       );
@@ -151,6 +161,8 @@ const PhotoList = () => {
   return (
     <div>
       <Filterbar
+        onToggleClick={toggleMobileFilter}
+        isFilterOpen={isFilterOpen}
         onFilterClick={filterByRover}
         onKeyPressed={filterByDate}
         onResetClick={resetDateToLatest}
