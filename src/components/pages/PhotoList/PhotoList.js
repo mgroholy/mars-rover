@@ -10,10 +10,16 @@ import LoaderSpinner from "./LoaderSpinner";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const Container = styled.div`
-  margin: 0 auto;
-  margin-top: 40px;
+  text-align: center;
+  margin: auto;
+  margin-top: 25px;
   margin-bottom: 10px;
   width: 800px;
+
+  @media screen and (max-width: 800px) {
+    margin-top: 15px;
+    width: 100%;
+  }
 `;
 
 const PhotoList = () => {
@@ -29,6 +35,9 @@ const PhotoList = () => {
   const [isDateFilterOn, setIsDateFilterOn] = useState(false);
 
   const didMountRef = useRef(false);
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const toggleMobileFilter = () => setIsFilterOpen(!isFilterOpen);
 
   useEffect(() => {
     const fetchMaxDate = async () => {
@@ -101,6 +110,7 @@ const PhotoList = () => {
   };
 
   const filterByRover = (e) => {
+    if (isFilterOpen) setIsFilterOpen(false);
     let roverName = e.target.textContent;
     document
       .querySelectorAll(".filter-rover a")
@@ -151,6 +161,8 @@ const PhotoList = () => {
   return (
     <div>
       <Filterbar
+        onToggleClick={toggleMobileFilter}
+        isFilterOpen={isFilterOpen}
         onFilterClick={filterByRover}
         onKeyPressed={filterByDate}
         onResetClick={resetDateToLatest}

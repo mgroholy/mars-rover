@@ -7,6 +7,11 @@ export const FilterBar = styled.div`
   margin: 0 auto;
   margin-top: 100px;
   border-radius: 10px;
+
+  @media screen and (max-width: 800px) {
+    width: 90vw;
+    margin-top: 80px;
+  }
 `;
 
 export const FilterRover = styled.div`
@@ -14,6 +19,10 @@ export const FilterRover = styled.div`
   display: flex;
   float: left;
   font-weight: bolder;
+
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 export const FilterDate = styled.div`
@@ -25,6 +34,10 @@ export const FilterDate = styled.div`
 export const Input = styled.input`
   border-radius: 5px;
   height: 25px;
+
+  @media screen and (max-width: 800px) {
+    width: 125px;
+  }
 `;
 
 export const Image = styled.img`
